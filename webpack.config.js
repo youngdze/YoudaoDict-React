@@ -18,7 +18,9 @@ module.exports = {
                 loader: 'babel',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['react', 'es2015'],
+                    optional: ['runtime'],
+                    stage: 0
+                    // presets: ['react', 'es2015'],
                     // plugins: ['transform-runtime', "syntax-async-functions", "transform-regenerator"]
                 }
             }
