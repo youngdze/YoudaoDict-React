@@ -1,40 +1,42 @@
 'use strict';
 
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
-module.exports = {
-    context: path.resolve(__dirname),
-    entry: './js/app.jsx',
-    output: {
-        path: path.resolve(__dirname, 'js'),
-        filename: 'app.js'
-    },
-    watch: true,
-    module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                loader: 'babel',
-                exclude: /node_modules/,
-                query: {
-                    optional: ['runtime'],
-                    stage: 0
-                    // presets: ['react', 'es2015'],
-                    // plugins: ['transform-runtime', "syntax-async-functions", "transform-regenerator"]
-                }
-            }
-        ]
-    },
+const NODE_ENV = process.env.NODE_ENV || 'dev';
 
-    plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
-        // new webpack.ProvidePlugin({
-        //     'Promise': 'bluebird'
-        // })
-    ]
+export default {
+  context: path.join(__dirname),
+  entry: {
+    'js/app': ['./src/js/app.js']
+  },
+  output: {
+    path: path.join(__dirname, 'build'),
+    filename: '[name].js'
+  },
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        presets: ['es2015', 'stage-0', 'react']
+      }
+    }, {
+      test: /\.(css|scss)$/,
+      exclude: /node_modules/,
+      loaders: ['style', 'css', `sass?${['outputStyle=compressed'].join('&')}`]
+    }, {
+      test: /\.(eot|ttf|woff|woff2|svg)$/,
+      exclude: /node_modules/,
+      loader: 'file?name=font/[name].[ext]'
+    }]
+  },
+  devtool: 'source-map',
+  cache: true,
+  debug: true,
+  node: {console: true},
+  plugins: [
+    // new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})
+  ]
 };

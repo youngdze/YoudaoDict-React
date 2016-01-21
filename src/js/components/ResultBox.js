@@ -2,20 +2,13 @@
 
 import React, {Component, PropTypes} from 'react';
 
-// TODO Youdao wordbook
-/*
-add http://dict.youdao.com/wordbook/ajax?action=addword&q= GET
- */
-
 export default class ResultBox extends Component {
-  constructor( props ){
-    super(props);
-  }
+  static protoTypes = {
+    translation: PropTypes.object.isRequired
+  };
 
-  static protoTypes(){
-    return {
-      translation:PropTypes.object.isRequired
-    };
+  constructor(props) {
+    super(props);
   }
 
   handleAdd() {
@@ -32,7 +25,7 @@ export default class ResultBox extends Component {
 
   asyncGet(url) {
     let xmlHttp;
-    if(window.XMLHttpRequest) {
+    if (window.XMLHttpRequest) {
       xmlHttp = new XMLHttpRequest();
     } else if (window.ActiveXObject) {
       try {
@@ -52,7 +45,7 @@ export default class ResultBox extends Component {
     return new Promise((resolve, reject) => {
       xmlHttp.onreadystatechange = () => {
         try {
-          if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+          if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
             return resolve(xmlHttp.responseText);
           } else {
             return reject('Request failed');
@@ -67,7 +60,7 @@ export default class ResultBox extends Component {
     });
   }
 
-  render(){
+  render() {
     return (
       <div className="row" id="resultBox">
         <div className="col s12">
@@ -76,18 +69,18 @@ export default class ResultBox extends Component {
               <div className="card-content white-text" id="resultField">
                 <div className="card-title" id="basic">
                   {this.props.translation.basic && this.props.translation.basic.phonetic && (
-                    <code className="pronoun">/{this.props.translation.basic.phonetic.split(';')[0]}/</code>)}
-                  {this.props.translation.basic && this.props.translation.basic.explains &&
-                  (<div
-                    dangerouslySetInnerHTML={{__html: this.props.translation.basic.explains.join('<br />')}}></div>)}
+                    <code className="pronoun">/{this.props.translation.basic.phonetic.split(';')[0]}/</code>
+                  )}
+                  {this.props.translation.basic && this.props.translation.basic.explains && (
+                    <div dangerouslySetInnerHTML={{
+                      __html: this.props.translation.basic.explains.join('<br />')
+                    }}></div>
+                  )}
                   {!this.props.translation.basic && this.props.translation.translation && this.props.translation.translation[0]}
                 </div>
-                {this.props.translation.web &&
-                this.props.translation.web.map(( w, key ) => (
-                  <p key={key} className='web-translation'>{w.key}: {w.value.join(', ')}</p>))}
-              </div>
-              <div className="card-action">
-                <a href="javascript:;" onClick={this.handleAdd.bind(this)}>添加到有道单词本</a>
+                {this.props.translation.web && this.props.translation.web.map((w, key) => (
+                  <p key={key} className='web-translation'>{w.key}: {w.value.join(', ')}</p>
+                ))}
               </div>
             </div>
           )}

@@ -1,0 +1,63 @@
+## reference: http://eslint.org/docs/user-guide/configuring
+---
+  env:
+    browser: true
+    node: true
+    es6: true
+  ecmaFeatures:
+    arrowFunctions: true
+    binaryLiterals: true
+    blockBindings: true
+    classes: true
+    defaultParams: true
+    destructuring: true
+    forOf: true
+    generators: true
+    modules: true
+    objectLiteralComputedProperties: true
+    objectLiteralDuplicateProperties: true
+    objectLiteralShorthandMethods: true
+    objectLiteralShorthandProperties: true
+    octalLiterals: true
+    regexUFlag: true
+    regexYFlag: true
+    spread: true
+    superInFunctions: true
+    templateStrings: true
+    unicodeCodePointEscapes: true
+    globalReturn: true
+    jsx: true
+  rules:
+    quotes:
+      - 0
+      - "backtick"
+      - "avoid-escape"
+    no-multi-spaces:
+      - 1
+      -
+        exceptions:
+          Property: true
+    key-spacing:
+      - 0
+      -
+        align: "colon"
+    semi:
+      - 1
+      - "always"
+    brace-style:
+      - 2
+      - "1tbs"
+      -
+        allowSingleLine: true
+    curly:
+      - 1
+      - "multi"
+    no-alert: 0
+    no-use-before-define: 1
+    new-cap: 1
+
+    no-unused-expressions: 0
+    no-unused-vars: 1
+    consistent-return: 0
+    eqeqeq: 1
+    no-mixed-spaces-and-tabs: 1
