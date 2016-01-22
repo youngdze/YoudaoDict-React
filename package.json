@@ -1,8 +1,15 @@
 {
   "name": "popup-react",
   "version": "0.0.0",
-  "description": "",
-  "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://youngdze@bitbucket.org/youngdze/popup-react.git"
+  },
+  "author": "youngdze",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/youngdze/popup-react#readme",
+  "scripts": {
+  },
   "dependencies": {
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
@@ -12,6 +19,7 @@
   "devDependencies": {
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
@@ -25,12 +33,5 @@
     "style-loader": "^0.13.0",
     "webpack": "^1.12.11",
     "webpack-stream": "^3.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://youngdze@bitbucket.org/youngdze/popup-react.git"
-  },
-  "author": "youngdze",
-  "license": "MIT",
-  "homepage": "https://bitbucket.org/youngdze/popup-react#readme"
+  }
 }

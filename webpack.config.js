@@ -4,6 +4,8 @@ import path from 'path';
 import webpack from 'webpack';
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 export default {
   context: path.join(__dirname),
@@ -20,10 +22,12 @@ export default {
       exclude: /node_modules/,
       loader: 'babel',
       query: {
-        presets: ['es2015', 'stage-0', 'react']
+        cacheDirectory: true,
+        presets: ['es2015', 'stage-0', 'react'],
+        plugins: ['transform-decorators-legacy']
       }
     }, {
-      test: /\.(css|scss)$/,
+      test: /\.s?css$/,
       exclude: /node_modules/,
       loaders: ['style', 'css', `sass?${['outputStyle=compressed'].join('&')}`]
     }, {
@@ -37,6 +41,7 @@ export default {
   debug: true,
   node: {console: true},
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})
+    // new CommonsChunkPlugin({name	: 'commons', filename: 'js/commons.js'}),
+    // new UglifyJsPlugin({compress: {warnings: false}})
   ]
 };

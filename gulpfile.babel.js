@@ -10,7 +10,7 @@ const bSync = create();
 gulp.task('browser-sync', () => {
   bSync.init({
     port: 8082,
-    files: ['src/js/**/*.js', 'src/*.html'],
+    files: ['build/js/**/*.js', 'build/*.html'],
     logFileChanges: true,
     server: {baseDir: './build'}
   });
@@ -34,3 +34,5 @@ gulp.task('default', ['move', 'webpack', 'browser-sync'], () => {
   gulp.watch(['src/js/**/*.js'], ['webpack']);
   gulp.watch(['src/*.html'], ['move']);
 });
+
+gulp.task('build', ['move', 'webpack']);

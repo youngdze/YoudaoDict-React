@@ -39,7 +39,7 @@ export default class Popup extends Component {
       let index = 0,
         timeout = 5000,
         callback = `__callback${index++}`;
-      const URL = `https://fanyi.youdao.com/openapi.do?keyfrom=YoungdzeBlog&key=498418215&type=data&doctype=jsonp&version=1.1&q=${encodeURIComponent(query.toString().trim())}`;
+      const URL = `https://fanyi.youdao.com/openapi.do?keyfrom=YoungdzeBlog&key=498418215&type=data&doctype=jsonp&version=1.1&q=${encodeURIComponent(query.trim())}`;
       let timeoutID = window.setTimeout(() => {
         reject({translation: ['Request timeout']});
       }, timeout);
@@ -80,15 +80,16 @@ export default class Popup extends Component {
   }
 
   render() {
+    let {...others} = this.props;
     return (
-      <div className='popup-container'>
+      <div className='popup-container' {...others}>
         <QueryBox
+          id="queryBox"
           query={this.state.query}
           handleChange={::this.handleChange}
-          fetchTranslation={::this.fetchTranslation}
-        ></QueryBox>
-        {this.state.loading && (<Loading />)}
-        <ResultBox translation={this.state.translation} />
+          fetchTranslation={::this.fetchTranslation} />
+        {this.state.loading && (<Loading id="loading" />)}
+        <ResultBox id="resultBox" translation={this.state.translation} />
       </div>
     );
   }

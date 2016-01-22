@@ -61,24 +61,23 @@ export default class ResultBox extends Component {
   }
 
   render() {
+    let {translation, ...others} = this.props;
     return (
-      <div className="row" id="resultBox">
+      <div className="row" {...others}>
         <div className="col s12">
-          {this.props.translation && (
+          {translation && (
             <div className="card blue-grey darken-1">
               <div className="card-content white-text" id="resultField">
                 <div className="card-title" id="basic">
-                  {this.props.translation.basic && this.props.translation.basic.phonetic && (
-                    <code className="pronoun">/{this.props.translation.basic.phonetic.split(';')[0]}/</code>
+                  {translation.basic && translation.basic.phonetic && (
+                    <code className="pronoun">/{translation.basic.phonetic.split(';')[0]}/</code>
                   )}
-                  {this.props.translation.basic && this.props.translation.basic.explains && (
-                    <div dangerouslySetInnerHTML={{
-                      __html: this.props.translation.basic.explains.join('<br />')
-                    }}></div>
+                  {translation.basic && translation.basic.explains && (
+                    <div dangerouslySetInnerHTML={{__html: translation.basic.explains.join('<br />')}}></div>
                   )}
-                  {!this.props.translation.basic && this.props.translation.translation && this.props.translation.translation[0]}
+                  {!translation.basic && translation.translation && translation.translation[0]}
                 </div>
-                {this.props.translation.web && this.props.translation.web.map((w, key) => (
+                {translation.web && translation.web.map((w, key) => (
                   <p key={key} className='web-translation'>{w.key}: {w.value.join(', ')}</p>
                 ))}
               </div>
