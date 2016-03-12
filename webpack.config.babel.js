@@ -1,20 +1,19 @@
-'use strict';
-
 import path from 'path';
-import webpack from 'webpack';
+import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
+import UglifyJsPlugin from 'webpack/lib/optimize/UglifyJsPlugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const NODE_ENV = process.env.NODE_ENV || 'dev';
-const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 export default {
   context: path.join(__dirname),
   entry: {
-    'js/app': ['./src/js/app.js']
+    'js/bundle': ['./src/js/app.js']
   },
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFileName: '[id].[chunk].js'
   },
   module: {
     loaders: [{
@@ -41,7 +40,7 @@ export default {
   debug: true,
   node: {console: true},
   plugins: [
-    // new CommonsChunkPlugin({name	: 'commons', filename: 'js/commons.js'}),
-    // new UglifyJsPlugin({compress: {warnings: false}})
+    new CommonsChunkPlugin({name: 'commons', filename: 'js/commons.js'}),
+    new HtmlWebpackPlugin({template: 'src/tpl/popup.html'}),
   ]
 };
